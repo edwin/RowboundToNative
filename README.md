@@ -29,7 +29,7 @@ have sql queries with limit like this
 ```
 
 
-Currently supporting 3 databases which i used the most, MySql, Postgresql and Oracle. Feel free to fork and do PR if you want to add some more databases.
+Currently supporting 3 databases which i used the most, MySql, Postgresql and Oracle. Feel free to fork and do PR if you want to add some more databases, or you could just ping me anytime :wink:.
 
 Hopefully, it will help a lot of people out there.
 
