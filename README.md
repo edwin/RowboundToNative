@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/edwin/RowboundToNative.svg?branch=master)](https://travis-ci.org/edwin/RowboundToNative)
 ## MyBatis Plugin for Converterting RowBound class to Native Paging Queries
-----
+
 MyBatis have a builtin pagination query using RowBound, but it use java's ResultSet absolute method for cursor position moving[1], but with using this library we can convert Rowbound(?, ?) into native sql queries, such as limit ?, ? for mysql. Supporting both manual MyBatis code and MyBatis Generator's generated codes. 
 
 Simply by adding Plugin tag on Connection.xml, 
