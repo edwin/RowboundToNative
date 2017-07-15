@@ -54,8 +54,8 @@ public class MySqlDialectTest {
     public void select() throws Exception {
         SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
         TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-        List<com.github.edwin.mybatis.bean.Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), new RowBounds(0, 1));
-        Assert.assertEquals(1, tests.size());
+        List<com.github.edwin.mybatis.bean.Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), new RowBounds(2, 2));
+        Assert.assertEquals(2, tests.size());
     }
     
 }
