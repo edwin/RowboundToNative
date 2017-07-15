@@ -29,9 +29,9 @@ public class MySqlDialectTest {
 
     @BeforeTest
     private void buildMysqlDb() throws Exception {
-        DB db = DB.newEmbeddedDB(3306);
+        DB db = DB.newEmbeddedDB(33307);
         db.start();
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:33307/test", "root", "");
         Statement statement = connection.createStatement();
         statement.executeUpdate("DROP TABLE IF EXISTS `test`");
         statement.executeUpdate("create table test(field1 VARCHAR(40) NOT NULL, PRIMARY KEY ( field1 ))");
