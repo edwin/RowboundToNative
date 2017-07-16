@@ -144,4 +144,10 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <select resultType="java.util.Map" id="selectByExample2" >
+    select *
+    from test
+  </select>
+  
 </mapper>
