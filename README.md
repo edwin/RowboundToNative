@@ -49,4 +49,4 @@ Footnote
 
 <a name="myfootnote3">[3]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/test/java/com/github/edwin/mybatis/dialect/MySqlDialectTest.java#L57
 
-<a name="myfootnote4">[4]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/test/java/com/github/edwin/mybatis/session/RowBounds2.java
+<a name="myfootnote4">[4]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/main/java/com/github/edwin/mybatis/session/RowBounds2.java
