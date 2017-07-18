@@ -15,6 +15,7 @@
 package com.github.edwin.mybatis.plugin;
 
 import com.github.edwin.mybatis.dialect.Dialect;
+import com.github.edwin.mybatis.session.RowBounds2;
 import java.util.Properties;
 
 import org.apache.ibatis.executor.Executor;
@@ -64,10 +65,19 @@ public class RowboundInterceptor implements Interceptor {
     void processIntercept(final Object[] queryArgs) {
         MappedStatement ms = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
         Object parameter = queryArgs[PARAMETER_INDEX];
-        final RowBounds rowBounds = (RowBounds) queryArgs[ROWBOUNDS_INDEX];
-        int offset = rowBounds.getOffset();
-        int limit = rowBounds.getLimit();
-
+        final Object rowBounds = queryArgs[ROWBOUNDS_INDEX];
+        long offset = 0;
+        long limit = 0;
+        
+        boolean isRowbound = (rowBounds instanceof RowBounds);
+        if(isRowbound) {
+            offset = ((RowBounds)rowBounds).getOffset();
+            limit = ((RowBounds)rowBounds).getLimit();
+        } else {
+            offset = ((RowBounds2)rowBounds).getOffset2();
+            limit = ((RowBounds2)rowBounds).getLimit2();
+        }
+        
         if (dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
             BoundSql boundSql = ms.getBoundSql(parameter);
             String sql = boundSql.getSql().trim();
@@ -80,7 +90,12 @@ public class RowboundInterceptor implements Interceptor {
             }
             limit = RowBounds.NO_ROW_LIMIT;
 
-            queryArgs[ROWBOUNDS_INDEX] = new RowBounds(offset, limit);
+            if(isRowbound) {
+                queryArgs[ROWBOUNDS_INDEX] = new RowBounds((int)offset, (int)limit);
+            } else if(rowBounds instanceof RowBounds) {
+                queryArgs[ROWBOUNDS_INDEX] = new RowBounds2(offset, limit);
+            }
+            
             BoundSql newBoundSql
                     = copyFromBoundSql(ms, sql, boundSql, boundSql.getParameterMappings(), parameter);
             MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql));

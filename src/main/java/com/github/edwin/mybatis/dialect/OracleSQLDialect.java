@@ -33,7 +33,7 @@ public class OracleSQLDialect extends Dialect {
     }
 
     @Override
-    public String getLimitString(String sql, int offset, int limit) {
+    public String getLimitString(String sql, long offset, long limit) {
         if (offset > 0) {
             return "select * from ( select row_.*, rownum rownum_ from (" + sql + " ) row_ ) where rownum_ <= " + (offset + limit) + " and rownum_ > " + offset;
         } else {

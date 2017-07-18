@@ -24,6 +24,13 @@ have sql queries with limit like this
 01:11:44 DEBUG selectByExampleWithRowbounds - <==      Total: 2
 ```
 
+Querying Large Number of Data
+----
+Providing RowBounds2 to replace RowBounds, which can accept long as both offset and limit <sup>[4](#myfootnote4)</sup>. 
+```java
+List<Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), new RowBounds2(20000000000l, 2));
+```
+
 
 Currently supporting 3 databases which i used the most, MySql, Postgresql and Oracle. Feel free to fork and do PR if you want to add some more databases, or you could just ping me anytime :wink:.
 
@@ -41,3 +48,5 @@ Footnote
 <a name="myfootnote2">[2]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/test/resources/ConfigurationMySql.xml
 
 <a name="myfootnote3">[3]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/test/java/com/github/edwin/mybatis/dialect/MySqlDialectTest.java#L57
+
+<a name="myfootnote4">[4]</a> :  https://github.com/edwin/RowboundToNative/blob/master/src/test/java/com/github/edwin/mybatis/session/RowBounds2.java

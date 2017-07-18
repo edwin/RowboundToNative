@@ -33,7 +33,7 @@ public class PostgreSQLDialect extends Dialect {
     }
 
     @Override
-    public String getLimitString(String sql, int offset, int limit) {
+    public String getLimitString(String sql, long offset, long limit) {
         if (offset > 0) 
             return sql + " limit " + limit + " offset " + offset;
         return sql + " limit " + limit;

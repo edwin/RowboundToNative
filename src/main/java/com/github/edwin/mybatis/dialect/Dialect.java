@@ -30,7 +30,7 @@ public class Dialect {
         return supportsLimit();
     }
 
-    public String getLimitString(String sql, int offset, int limit) {
+    public String getLimitString(String sql, long offset, long limit) {
         throw new UnsupportedOperationException("paged queries not supported");
     }
 }

@@ -4,9 +4,9 @@ import ch.vorburger.mariadb4j.DB;
 import com.github.edwin.mybatis.bean.TestExample;
 import com.github.edwin.mybatis.config.MyBatisSqlSessionFactory;
 import com.github.edwin.mybatis.mapper.TestMapper;
+import com.github.edwin.mybatis.session.RowBounds2;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +57,14 @@ public class MySqlDialectTest {
         TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
         List<com.github.edwin.mybatis.bean.Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), new RowBounds(2, 2));
         Assert.assertEquals(2, tests.size());
+    }
+    
+    @Test
+    public void selectRowbounds2() throws Exception {
+        SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
+        TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+        List<com.github.edwin.mybatis.bean.Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), new RowBounds2(20000000000l, 2));
+        Assert.assertEquals(0, tests.size());
     }
     
     @Test
