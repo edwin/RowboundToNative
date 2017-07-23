@@ -31,10 +31,8 @@ public class RowBounds2 extends RowBounds {
     private long limit2 = 0l;
     
     public RowBounds2() {
-    }
-
-    public RowBounds2(int offset2, int limit2) {
-        super(offset2, limit2);
+        this.offset2 = 0;
+        this.limit2 = 5;
     }
 
     public RowBounds2(long offset2, long limit2) {
