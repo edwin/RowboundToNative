@@ -39,7 +39,7 @@ public class Db2SQLDialect extends Dialect {
     public String getLimitString(String sql, long offset, long limit) {
         if (offset > 0) 
             return sql + " OFFSET " + offset+ " ROWS FETCH NEXT " + limit+" ROWS ONLY " ;
-        return sql + " FETCH NEXT " + limit+" ROWS ONLY ";
+        return sql + " FETCH FIRST " + limit+" ROWS ONLY ";
     }
     
 }

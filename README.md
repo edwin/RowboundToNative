@@ -32,7 +32,7 @@ List<Test> tests = testMapper.selectByExampleWithRowbounds(new TestExample(), ne
 ```
 
 
-Currently supporting 5 databases which i used the most. MySql, Postgresql, DB2 (tested using Apache Derby), SQL Server (tested using H2) and Oracle. Feel free to fork and do PR if you want to add some more databases, create Issue for requests, or you could just ping me anytime :wink:.
+Currently supporting 5 databases which i used the most. MySql 5.5.27, Postgresql 9.4, DB2 9.7 (tested using Apache Derby 10.13.1.1), SQL Server 2012 (tested using H2 1.4.192) and Oracle 11g. Feel free to fork and do PR if you want to add some more databases, create Issue for requests, or you could just ping me anytime :wink:.
 
 Hopefully, it will help a lot of people out there.
 
