@@ -69,13 +69,14 @@ public class RowboundInterceptor implements Interceptor {
         long offset = 0;
         long limit = 0;
         
-        boolean isRowbound = (rowBounds instanceof RowBounds);
-        if(isRowbound) {
-            offset = ((RowBounds)rowBounds).getOffset();
-            limit = ((RowBounds)rowBounds).getLimit();
-        } else {
+        // check whether its rowbound2 or a simple rowbound
+        boolean isRowbound2 = (rowBounds instanceof RowBounds2);
+        if(isRowbound2) {
             offset = ((RowBounds2)rowBounds).getOffset2();
             limit = ((RowBounds2)rowBounds).getLimit2();
+        } else {
+            offset = ((RowBounds)rowBounds).getOffset();
+            limit = ((RowBounds)rowBounds).getLimit();
         }
         
         if (dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
@@ -90,10 +91,10 @@ public class RowboundInterceptor implements Interceptor {
             }
             limit = RowBounds.NO_ROW_LIMIT;
 
-            if(isRowbound) {
-                queryArgs[ROWBOUNDS_INDEX] = new RowBounds((int)offset, (int)limit);
-            } else if(rowBounds instanceof RowBounds) {
+            if(isRowbound2) {
                 queryArgs[ROWBOUNDS_INDEX] = new RowBounds2(offset, limit);
+            } else if(rowBounds instanceof RowBounds) {
+                queryArgs[ROWBOUNDS_INDEX] = new RowBounds((int)offset, (int)limit);
             }
             
             BoundSql newBoundSql
